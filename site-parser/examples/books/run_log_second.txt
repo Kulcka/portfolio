@@ -1,0 +1,12 @@
+12:03:34 INFO    Прогон «Books to Scrape»: https://books.toscrape.com/catalogue/page-1.html
+12:03:34 INFO    Страница каталога 1: https://books.toscrape.com/catalogue/page-1.html — карточек: 20
+12:03:34 INFO    Собрано записей: 20
+12:03:34 INFO    Страница каталога 2: https://books.toscrape.com/catalogue/page-2.html — карточек: 20
+12:03:34 INFO    Собрано записей: 40
+12:03:34 INFO    Достигнут лимит страниц каталога: 2
+12:03:34 INFO    Картинки: скачано 0, уже были 10, ошибок 0
+12:03:34 INFO    Сбор завершён: страниц 42 (запросов 0, из кэша 42, повторов 0), записей 40, повторов записей 0
+12:03:34 INFO    Google Sheets не настроена (output.google_sheets.spreadsheet) — пропуск
+12:03:34 INFO    Изменения: новых 2, цена изменилась 3, пропало 1, прочих 2
+12:03:34 INFO    Файлы: output\books_toscrape\books.csv, output\books_toscrape\books.xlsx, output\books_toscrape\books.json, output\books_toscrape\changes.md
+12:03:34 INFO    Готово за 0 с: записей 40, страниц 42, ошибок 0, код выхода 0

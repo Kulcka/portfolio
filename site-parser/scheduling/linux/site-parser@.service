@@ -1,0 +1,29 @@
+# Один прогон парсера. %i — имя конфига без .yaml (configs/%i.yaml).
+# Установка (проект лежит в /opt/site-parser, пользователь parser):
+#   sudo cp site-parser@.service site-parser@.timer /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now site-parser@books_toscrape.timer
+# Проверка:  systemctl list-timers 'site-parser@*'
+# Журнал:    journalctl -u site-parser@books_toscrape -n 50   и   /opt/site-parser/logs/site_parser.log
+
+[Unit]
+Description=Site parser run (%i)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=parser
+Group=parser
+WorkingDirectory=/opt/site-parser
+ExecStart=/opt/site-parser/.venv/bin/python -m site_parser run configs/%i.yaml
+# Коды 0 — успешно, 3 — готово с предупреждениями: второе не считаем падением юнита.
+SuccessExitStatus=3
+TimeoutStartSec=3h
+Nice=10
+# Ограничения: сервис пишет только в свою папку.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/site-parser

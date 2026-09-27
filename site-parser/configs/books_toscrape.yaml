@@ -1,0 +1,119 @@
+# Books to Scrape — учебный каталог для тренировки парсинга (https://books.toscrape.com).
+# Каталог с пагинацией → карточка товара: цена, наличие, остаток, рейтинг, категория,
+# описание, характеристики из таблицы, картинка.
+#
+# Полный каталог — 50 страниц и 1000 карточек (~20 минут при паузе 1 с).
+# Бережный демо-прогон: python -m site_parser run configs/books_toscrape.yaml --max-pages 2 --max-images 10
+
+name: books_toscrape
+title: Books to Scrape
+
+start_urls:
+  - https://books.toscrape.com/catalogue/page-1.html
+
+request:
+  delay: 1.2              # пауза между запросами к сайту, секунд
+  timeout: 20
+  retries: 3              # повторы при сбоях сети, 429 и 5xx
+  backoff: 2              # пауза перед повтором: 2, 4, 8 с…
+  user_agent: "SiteParserDemo/1.0 (portfolio demo; polite crawler, 1 req/s)"
+  respect_robots: true
+  cache: false            # true — страницы кэшируются в .cache/pages (для отладки селекторов)
+
+# Страница каталога: одна карточка товара = один элемент list.item
+list:
+  item: article.product_pod
+  link: h3 a              # ссылка на карточку товара
+  fields:
+    title:
+      css: h3 a
+      attr: title         # в тексте ссылки название обрезано, полное — в атрибуте title
+      label: Название
+      required: true
+    price:
+      css: p.price_color
+      type: price
+      label: Цена
+    currency:
+      css: p.price_color
+      type: currency
+      label: Валюта
+    in_stock:
+      css: p.instock.availability
+      type: availability
+      label: В наличии
+    rating:
+      css: p.star-rating
+      attr: class
+      regex: 'star-rating\s+(\w+)'
+      map: {One: 1, Two: 2, Three: 3, Four: 4, Five: 5}
+      type: int
+      label: Рейтинг
+
+pagination:
+  next: li.next a         # ссылка «next»; на последней странице её нет
+  max_pages: 50
+
+# Карточка товара
+detail:
+  fields:
+    upc:
+      css: 'table.table-striped tr:has(> th:-soup-contains("UPC")) > td'
+      label: Артикул (UPC)
+      required: true
+    category:
+      css: ul.breadcrumb li:nth-of-type(3) a
+      label: Категория
+    stock_qty:
+      css: p.instock.availability
+      regex: '(\d+)\s+available'
+      type: int
+      default: 0
+      label: Остаток, шт.
+    description:
+      css: '#product_description + p'
+      label: Описание
+    image_url:
+      css: '#product_gallery img'
+      attr: src           # относительный адрес станет абсолютным
+      label: Картинка (URL)
+  # Все строки таблицы «Product Information» — отдельными колонками.
+  # У товаров разных категорий набор характеристик может отличаться — колонки соберутся сами.
+  specs:
+    rows: table.table-striped tr
+    key: th
+    value: td
+    prefix: "Характеристика: "
+    exclude: [UPC, Availability]
+
+images:
+  field: image_url
+  dir: images
+  column: image_file
+  label: Файл картинки
+
+output:
+  dir: output/books_toscrape
+  basename: books
+  formats: [csv, xlsx, json]
+  sheet_name: Товары
+  google_sheets:
+    spreadsheet: ${GOOGLE_SHEET_ID:-}   # ID или ссылка таблицы; пусто — выгрузка в Google пропускается
+    worksheet: Товары
+    changes_worksheet: Изменения
+
+changes:
+  key: upc                # по какому полю сопоставлять товары между прогонами
+  title_field: title
+  price_field: price
+  track: [in_stock, stock_qty]
+
+notify:
+  telegram:
+    enabled: true         # токен и chat_id — в .env; без них уведомление просто пропускается
+    only_changes: true
+    max_lines: 10
+
+storage:
+  path: state/site_parser.sqlite3
+  keep_runs: 30

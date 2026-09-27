@@ -1,0 +1,9 @@
+# Вариант с cron (если systemd недоступен). Добавить: crontab -e
+# flock -n не даёт запустить второй прогон, пока идёт первый.
+# Время — в часовом поясе сервера (проверить: date).
+
+# Ежедневно в 09:00
+0 9 * * *  cd /opt/site-parser && flock -n /tmp/site-parser-books.lock .venv/bin/python -m site_parser run configs/books_toscrape.yaml >> logs/cron.log 2>&1
+
+# Каждые 4 часа
+# 0 */4 * * *  cd /opt/site-parser && flock -n /tmp/site-parser-books.lock .venv/bin/python -m site_parser run configs/books_toscrape.yaml >> logs/cron.log 2>&1

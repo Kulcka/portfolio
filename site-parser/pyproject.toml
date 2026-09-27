@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=65"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "site-parser"
+version = "1.0.0"
+description = "Парсер сайтов по YAML-конфигу: CSV, Excel, Google Sheets, отчёт об изменениях, Telegram, запуск по расписанию"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+    "PyYAML>=6.0",
+    "openpyxl>=3.1",
+    "python-dotenv>=1.0",
+    "gspread>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "mypy>=1.10", "types-requests", "types-PyYAML", "pywin32>=306; sys_platform == 'win32'"]
+
+[project.scripts]
+site-parser = "site_parser.cli:main"
+
+[tool.setuptools]
+packages = ["site_parser"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+markers = ["excel: открывает выгрузку настоящим Excel через COM (только Windows с Excel)"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]  # кириллица и типографские символы в строках — намеренно
+
+[tool.mypy]
+python_version = "3.11"
+files = ["site_parser"]
+disallow_untyped_defs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+module = ["gspread.*", "google.*"]
+ignore_missing_imports = true

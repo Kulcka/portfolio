@@ -1,0 +1,6 @@
+aiogram==3.31.0
+openpyxl==3.1.5
+PyYAML==6.0.3
+python-dotenv==1.2.3
+# База часовых поясов: на Windows своей нет, без неё не работает Europe/Moscow.
+tzdata==2026.4

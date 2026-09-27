@@ -1,0 +1,9 @@
+# Тестовый robots.txt (вымышленный магазин shop.test)
+User-agent: BadBot
+Disallow: /
+
+User-agent: *
+Allow: /search/help
+Disallow: /cart/
+Disallow: /search
+Crawl-delay: 3

@@ -1,0 +1,11 @@
+# Рабочие зависимости (ставятся в .venv проекта: pip install -r requirements.txt && pip install -e .)
+pdfplumber>=0.11      # чтение текста и таблиц из PDF (pdfminer.six внутри)
+openpyxl>=3.1         # чтение и запись .xlsx с оформлением
+python-docx>=1.1      # чтение и запись .docx
+rapidfuzz>=3.0        # нечёткое сравнение строк (дубли, синонимы колонок)
+PyYAML>=6.0           # конфиг синонимов колонок
+fpdf2>=2.7            # генерация демо-PDF для примеров и тестов
+pywin32>=306; sys_platform == "win32"   # Word COM: DOCX/DOC/RTF -> PDF
+
+# Тесты
+pytest>=8

@@ -1,0 +1,33 @@
+# systemd-юнит бота приёма заявок.
+# Установка (Ubuntu/Debian), от root:
+#   cp deploy/leads-bot.service /etc/systemd/system/
+#   systemctl daemon-reload && systemctl enable --now leads-bot
+# Логи: journalctl -u leads-bot -f
+
+[Unit]
+Description=Leads bot (Telegram + MAX)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=leadsbot
+Group=leadsbot
+WorkingDirectory=/opt/leads-bot
+# Настройки берутся из /opt/leads-bot/.env и /opt/leads-bot/config.yaml
+ExecStart=/opt/leads-bot/.venv/bin/python -m leads_bot run
+Restart=on-failure
+RestartSec=5
+# Код 78 — ошибка настройки (неверный токен, битый config.yaml): перезапуск не поможет.
+RestartPreventExitStatus=78
+
+# Ограничения: бот пишет только в свою папку data/.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/leads-bot/data
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

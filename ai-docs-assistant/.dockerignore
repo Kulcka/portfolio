@@ -1,0 +1,10 @@
+.venv
+.env
+data
+certs
+tests
+eval
+scripts
+__pycache__
+.pytest_cache
+*.md

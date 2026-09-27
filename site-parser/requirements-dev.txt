@@ -1,0 +1,8 @@
+-r requirements.txt
+pytest>=8
+ruff>=0.5
+mypy>=1.10
+types-requests
+types-PyYAML
+types-openpyxl
+pywin32>=306; sys_platform == "win32"

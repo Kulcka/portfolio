@@ -1,0 +1,16 @@
+# Расписание прогона. %i — имя конфига без .yaml.
+# Формат OnCalendar: "*-*-* 09:00:00" — ежедневно в 9:00; "*-*-* 00/4:00:00" — каждые 4 часа;
+# "Mon..Fri 08:30" — по будням. Проверить выражение: systemd-analyze calendar "*-*-* 09:00:00"
+
+[Unit]
+Description=Site parser schedule (%i)
+
+[Timer]
+OnCalendar=*-*-* 09:00:00
+# Сервер был выключен в момент запуска — выполнить при включении.
+Persistent=true
+# Небольшой случайный сдвиг, чтобы не нагружать сайт ровно в одно время.
+RandomizedDelaySec=5min
+
+[Install]
+WantedBy=timers.target

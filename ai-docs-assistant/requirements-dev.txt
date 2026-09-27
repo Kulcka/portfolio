@@ -1,0 +1,4 @@
+-r requirements.txt
+# Тесты и пересборка демо-корпуса (scripts/build_demo_corpus.py)
+pytest==9.1.1
+fpdf2==2.8.8

@@ -1,0 +1,65 @@
+# Шаблон конфига под новый сайт. Скопируйте в configs/<имя>.yaml и заполните.
+# Проверка селекторов без сохранения: python -m site_parser check configs/<имя>.yaml --cache
+# Все ключи, кроме name, start_urls и list/detail, необязательны.
+
+name: my_shop                     # латиница: из него имена файлов и записи в истории
+title: Мой магазин                # как называть в отчётах и уведомлениях
+
+start_urls:                       # одна или несколько категорий
+  - https://example.com/catalog/phones
+# start_urls_file: urls.txt       # или список ссылок на карточки из файла (по строке на адрес)
+
+request:
+  delay: 1.5                      # пауза между запросами, с (Crawl-delay из robots.txt главнее)
+  retries: 3
+  user_agent: "MyShopParser/1.0 (+contact@example.com)"
+  respect_robots: true
+  cache: false                    # true — для отладки: страницы берутся с диска
+  # headers: {Cookie: "city=msk"} # если цены зависят от города/региона
+
+list:                             # страница категории
+  item: div.product-card          # одна карточка товара
+  link: a.product-card__link      # ссылка на карточку (нужна, если есть секция detail)
+  fields:
+    title: {css: .product-card__title, label: Название, required: true}
+    price: {css: .price__current, type: price, label: Цена}
+    old_price: {css: .price__old, type: price, label: Старая цена}
+    currency: {css: .price__current, type: currency, label: Валюта}
+    in_stock: {css: .stock, type: availability, label: В наличии}
+
+pagination:
+  next: a.pagination__next        # ссылка «Дальше»…
+  # template: https://example.com/catalog/phones?page={page}   # …или шаблон номера страницы
+  max_pages: 100
+
+detail:                           # карточка товара (необязательно)
+  fields:
+    sku: {css: '[itemprop="sku"]', label: Артикул, required: true}
+    brand: {css: '[itemprop="brand"]', label: Бренд}
+    images: {css: .gallery img, attr: data-src, multiple: true, label: Картинки}
+    description: {css: .description, label: Описание}
+  specs:                          # все характеристики — отдельными колонками
+    rows: .specs tr
+    key: th
+    value: td
+    # или для списков <dl>: keys: .specs dt, values: .specs dd
+
+images:                           # скачать картинки (необязательно)
+  field: images
+  dir: images
+
+output:
+  formats: [csv, xlsx]            # + json
+  sheet_name: Товары
+  google_sheets:
+    spreadsheet: ${GOOGLE_SHEET_ID:-}
+    worksheet: Товары
+
+changes:
+  key: sku                        # по чему узнавать товар между прогонами
+  track: [in_stock, old_price]    # что ещё отслеживать, кроме цены
+
+notify:
+  telegram:
+    enabled: true
+    only_changes: true

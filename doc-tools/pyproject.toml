@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=65"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doctools"
+version = "1.0.0"
+description = "Обработка документов и таблиц: PDF -> Excel/Word, чистка, объединение, заполнение шаблонов, конвертация"
+requires-python = ">=3.10"
+dependencies = [
+    "pdfplumber>=0.11",
+    "openpyxl>=3.1",
+    "python-docx>=1.1",
+    "rapidfuzz>=3.0",
+    "PyYAML>=6.0",
+    "fpdf2>=2.7",
+    "pywin32>=306; sys_platform == 'win32'",
+]
+
+[project.scripts]
+doctools = "doctools.cli:main"
+
+[tool.setuptools]
+packages = ["doctools"]
+
+[tool.setuptools.package-data]
+doctools = ["*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not word'"
+markers = [
+    "word: тесты, которым нужен установленный Microsoft Word (COM). Запуск: pytest -m word",
+]

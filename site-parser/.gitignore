@@ -1,0 +1,24 @@
+# Окружение и секреты
+.venv/
+.env
+.env.*
+!.env.example
+secrets/
+*service-account*.json
+*credentials*.json
+
+# Результаты прогонов (примеры для показа — в examples/)
+output/
+state/
+logs/
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/

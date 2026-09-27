@@ -1,0 +1,9 @@
+# Зависимости парсера (проверено на Python 3.11, Windows 11)
+requests>=2.31,<3
+beautifulsoup4>=4.12,<5
+lxml>=5.0
+PyYAML>=6.0,<7
+openpyxl>=3.1,<4
+python-dotenv>=1.0,<2
+# Выгрузка в Google Sheets (необязательна, но ставится сразу)
+gspread>=6.0,<7

@@ -1,0 +1,51 @@
+# Quotes to Scrape — учебный сайт для тренировки парсинга (https://quotes.toscrape.com).
+# Пример пагинации по шаблону номера страницы и полей-списков (теги).
+# Ссылки «next» на сайте тоже есть, но здесь показан второй режим — шаблон:
+# парсер идёт по /page/1/, /page/2/, … и останавливается на первой пустой странице
+# (или на 404).
+
+name: quotes_toscrape
+title: Quotes to Scrape
+
+request:
+  delay: 1.0
+  user_agent: "SiteParserDemo/1.0 (portfolio demo; polite crawler, 1 req/s)"
+  respect_robots: true
+
+list:
+  item: div.quote
+  fields:
+    text:
+      css: span.text
+      regex: '^[“"]?(.*?)[”"]?$'    # без кавычек-ёлочек по краям
+      label: Цитата
+      required: true
+    author:
+      css: small.author
+      label: Автор
+      required: true
+    author_url:
+      css: 'a[href^="/author/"]'
+      attr: href
+      label: Об авторе
+    tags:
+      css: a.tag
+      multiple: true
+      label: Теги
+
+pagination:
+  template: https://quotes.toscrape.com/page/{page}/
+  start: 1
+  max_pages: 20
+
+output:
+  dir: output/quotes_toscrape
+  basename: quotes
+  formats: [csv, xlsx]
+  sheet_name: Цитаты
+
+changes:
+  key: [author, text]     # у цитат нет артикула — ключ из двух полей
+
+storage:
+  path: state/site_parser.sqlite3

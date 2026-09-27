@@ -1,0 +1,24 @@
+12:03:55 INFO    Прогон «Quotes to Scrape»: https://quotes.toscrape.com/page/1/
+12:03:56 INFO    robots.txt https://quotes.toscrape.com/robots.txt: файла нет (HTTP 404) — ограничений нет
+12:03:56 INFO    Страница каталога 1: https://quotes.toscrape.com/page/1/ — карточек: 10
+12:03:57 INFO    Страница каталога 2: https://quotes.toscrape.com/page/2/ — карточек: 10
+12:03:57 INFO    Собрано записей: 20
+12:03:58 INFO    Страница каталога 3: https://quotes.toscrape.com/page/3/ — карточек: 10
+12:03:59 INFO    Страница каталога 4: https://quotes.toscrape.com/page/4/ — карточек: 10
+12:03:59 INFO    Собрано записей: 40
+12:04:00 INFO    Страница каталога 5: https://quotes.toscrape.com/page/5/ — карточек: 10
+12:04:01 INFO    Страница каталога 6: https://quotes.toscrape.com/page/6/ — карточек: 10
+12:04:01 INFO    Собрано записей: 60
+12:04:02 INFO    Страница каталога 7: https://quotes.toscrape.com/page/7/ — карточек: 10
+12:04:03 INFO    Страница каталога 8: https://quotes.toscrape.com/page/8/ — карточек: 10
+12:04:03 INFO    Собрано записей: 80
+12:04:04 INFO    Страница каталога 9: https://quotes.toscrape.com/page/9/ — карточек: 10
+12:04:05 INFO    Страница каталога 10: https://quotes.toscrape.com/page/10/ — карточек: 10
+12:04:05 INFO    Собрано записей: 100
+12:04:06 INFO    Страница каталога 11: https://quotes.toscrape.com/page/11/ — карточек: 0
+12:04:06 INFO    Сбор завершён: страниц 11 (запросов 12, из кэша 0, повторов 0), записей 100, повторов записей 0
+12:04:06 INFO    Колонка «Теги» заполнена у 97 из 100 записей
+12:04:06 INFO    Google Sheets не настроена (output.google_sheets.spreadsheet) — пропуск
+12:04:06 INFO    Первый прогон — сравнивать не с чем
+12:04:06 INFO    Файлы: output\quotes_toscrape\quotes.csv, output\quotes_toscrape\quotes.xlsx, output\quotes_toscrape\changes.md
+12:04:06 INFO    Готово за 11 с: записей 100, страниц 11, ошибок 0, код выхода 0

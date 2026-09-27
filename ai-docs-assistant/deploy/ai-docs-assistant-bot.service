@@ -1,0 +1,34 @@
+# systemd-служба Telegram-бота.
+# Установка (Ubuntu/Debian, от root):
+#   useradd --system --create-home --home-dir /opt/ai-docs-assistant docsbot
+#   cp -r . /opt/ai-docs-assistant && chown -R docsbot: /opt/ai-docs-assistant
+#   sudo -u docsbot python3 -m venv /opt/ai-docs-assistant/.venv
+#   sudo -u docsbot /opt/ai-docs-assistant/.venv/bin/pip install -r /opt/ai-docs-assistant/requirements.txt
+#   cp deploy/ai-docs-assistant-bot.service /etc/systemd/system/
+#   chmod 600 /opt/ai-docs-assistant/.env
+#   systemctl daemon-reload && systemctl enable --now ai-docs-assistant-bot
+# Журнал: journalctl -u ai-docs-assistant-bot -f
+
+[Unit]
+Description=AI docs assistant Telegram bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=docsbot
+WorkingDirectory=/opt/ai-docs-assistant
+EnvironmentFile=/opt/ai-docs-assistant/.env
+ExecStart=/opt/ai-docs-assistant/.venv/bin/python -m docs_assistant bot
+Restart=on-failure
+RestartSec=10
+
+# Ограничения: бот читает документы и пишет только в свою папку индекса
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/ai-docs-assistant/data
+
+[Install]
+WantedBy=multi-user.target
