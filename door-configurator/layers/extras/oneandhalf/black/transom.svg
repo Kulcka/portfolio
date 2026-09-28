@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1000" viewBox="0 0 600 1000">
+<defs>
+<linearGradient id="mg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2a2b2e"/><stop offset="1" stop-color="#1b1c1e"/></linearGradient><filter id="mn" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 0.3"/></feComponentTransfer><feComposite operator="in" in2="SourceGraphic"/></filter>
+<linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6f8793"/><stop offset=".55" stop-color="#3a4d57"/><stop offset="1" stop-color="#26343c"/></linearGradient><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef0f2"/><stop offset=".5" stop-color="#9ea4aa"/><stop offset="1" stop-color="#d7dadd"/></linearGradient><linearGradient id="gf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9eef0"/><stop offset="1" stop-color="#bcc7cc"/></linearGradient>
+<clipPath id="bars"><path d="M97 164 h406 v110 h-406 Z"/></clipPath>
+<filter id="sh" x="0" y="0" width="600" height="1000" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="6"/></filter>
+</defs>
+<g filter="url(#sh)"><rect x="95" y="167" width="410" height="107" fill="#000" opacity=".3"/></g>
+
+<g clip-path="url(#bars)"><rect x="97" y="164" width="406" height="766" fill="url(#mg)"/><rect x="97" y="164" width="406" height="766" fill="#fff" filter="url(#mn)" opacity=".5"/></g>
+<rect x="113" y="180" width="374" height="94" fill="url(#gl)"/><path d="M113 227 L487 208.2 L487 213.8 L113 232.6 Z" fill="#fff" opacity=".12"/><rect x="113" y="180" width="374" height="94" fill="none" stroke="#000" stroke-opacity=".45" stroke-width="1.5"/>
+
+<path d="M97 164 h406 v110 h-406 Z" fill="none" stroke="#000" stroke-opacity=".45"/>
+</svg>

@@ -1,0 +1,764 @@
+/* Конфигуратор входной двери. Все правила — внутри .dc, чтобы не задевать стили сайта. */
+
+.dc {
+  --dc-bg: #f3f2ef;
+  --dc-card: #ffffff;
+  --dc-text: #1d1f22;
+  --dc-muted: #6a6e75;
+  --dc-line: #e1dfda;
+  --dc-accent: #23262b;
+  --dc-accent-hover: #3a3e45;
+  --dc-accent-soft: #f4f1ec;
+  --dc-price: #8a5a2b;
+  --dc-warn: #9b4a24;
+  --dc-focus: #2f6fdf;
+  --dc-radius: 16px;
+  --dc-shadow: 0 1px 2px rgba(20, 22, 26, 0.06), 0 8px 24px rgba(20, 22, 26, 0.06);
+
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(300px, 440px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  color: var(--dc-text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  color-scheme: light;
+}
+
+.dc *,
+.dc *::before,
+.dc *::after {
+  box-sizing: inherit;
+}
+
+/* ---------- превью ---------- */
+
+.dc__preview {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  background: var(--dc-card);
+  border-radius: var(--dc-radius);
+  box-shadow: var(--dc-shadow);
+}
+
+.dc__stage-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.dc__stage {
+  position: relative;
+  width: clamp(220px, calc((100vh - 290px) * var(--dc-k, 0.6)), 100%);
+  aspect-ratio: var(--dc-ratio, 3 / 5);
+  overflow: hidden;
+  border-radius: 12px;
+  background: #e8e6e2;
+}
+
+.dc__layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.dc__layer-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  user-select: none;
+}
+
+.dc__layer-img.is-visible {
+  opacity: 1;
+}
+
+.dc__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px;
+}
+
+.dc__total-label {
+  color: var(--dc-muted);
+}
+
+.dc__total-value {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.dc__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.dc__actions .dc-btn--primary {
+  grid-column: 1 / -1;
+}
+
+/* ---------- кнопки ---------- */
+
+.dc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--dc-line);
+  border-radius: 10px;
+  background: var(--dc-card);
+  color: var(--dc-text);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.dc-btn:hover {
+  border-color: #c9c6bf;
+  background: #faf9f7;
+}
+
+.dc-btn:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.dc-btn--primary {
+  border-color: var(--dc-accent);
+  background: var(--dc-accent);
+  color: #fff;
+}
+
+.dc-btn--primary:hover {
+  border-color: var(--dc-accent-hover);
+  background: var(--dc-accent-hover);
+}
+
+.dc-btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--dc-muted);
+}
+
+.dc-btn--ghost:hover {
+  border-color: var(--dc-line);
+  background: transparent;
+  color: var(--dc-text);
+}
+
+.dc-btn:focus-visible,
+.dc-dialog__close:focus-visible,
+.dc-field input:focus-visible,
+.dc-field textarea:focus-visible,
+.dc-result__json:focus-visible {
+  outline: 3px solid var(--dc-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- группы опций ---------- */
+
+.dc__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.dc__options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+}
+
+.dc-group {
+  min-width: 0;
+  margin: 0;
+  padding: 16px 18px 18px;
+  border: 0;
+  border-radius: var(--dc-radius);
+  background: var(--dc-card);
+  box-shadow: var(--dc-shadow);
+}
+
+.dc-group__title {
+  float: left;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 0;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.dc-group__current {
+  color: var(--dc-muted);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.dc-group__hint {
+  clear: both;
+  margin: -6px 0 12px;
+  color: var(--dc-muted);
+  font-size: 13px;
+}
+
+.dc-group__options {
+  clear: both;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 10px;
+}
+
+/* карточка варианта: радиокнопка скрыта визуально, но доступна с клавиатуры и для экранных дикторов */
+.dc-opt {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.dc-opt__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+}
+
+.dc-opt__card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  padding: 8px 12px 8px 8px;
+  border: 1.5px solid var(--dc-line);
+  border-radius: 12px;
+  background: var(--dc-card);
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dc-opt:hover .dc-opt__card {
+  border-color: #c4c0b8;
+}
+
+.dc-opt__input:checked + .dc-opt__card {
+  border-color: var(--dc-accent);
+  background: var(--dc-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--dc-accent);
+}
+
+.dc-opt__input:checked + .dc-opt__card::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--dc-accent)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.2l2.6 2.6L13 6.4' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 18px 18px no-repeat;
+}
+
+.dc-opt__input:focus-visible + .dc-opt__card {
+  outline: 3px solid var(--dc-focus);
+  outline-offset: 2px;
+}
+
+.dc-opt__input:disabled + .dc-opt__card {
+  border-style: dashed;
+  background: #f7f6f4;
+  cursor: not-allowed;
+}
+
+.dc-opt__input:disabled + .dc-opt__card .dc-opt__thumb,
+.dc-opt__input:disabled + .dc-opt__card .dc-opt__name,
+.dc-opt__input:disabled + .dc-opt__card .dc-opt__note,
+.dc-opt__input:disabled + .dc-opt__card .dc-opt__price {
+  opacity: 0.45;
+}
+
+.dc-opt__thumb {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #e7e5e1;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.dc-opt__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dc-opt__thumb--empty {
+  display: none;
+}
+
+.dc-opt__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding-right: 18px;
+}
+
+.dc-opt__name {
+  font-weight: 550;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.dc-opt__note {
+  color: var(--dc-muted);
+  font-size: 12.5px;
+}
+
+.dc-opt__price {
+  color: var(--dc-price);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dc-opt__hint {
+  color: var(--dc-warn);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.dc-opt__hint:empty {
+  display: none;
+}
+
+/* ---------- «Ваша дверь» ---------- */
+
+.dc__summary {
+  padding: 18px;
+  border-radius: var(--dc-radius);
+  background: var(--dc-card);
+  box-shadow: var(--dc-shadow);
+}
+
+.dc__summary-title {
+  margin: 0 0 10px;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.dc-summary__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dc-summary__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--dc-line);
+}
+
+.dc-summary__name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dc-summary__group {
+  color: var(--dc-muted);
+  font-size: 12.5px;
+}
+
+.dc-summary__price {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.dc-summary__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  font-size: 17px;
+}
+
+.dc-summary__total strong {
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dc-summary__note {
+  margin: 8px 0 0;
+  color: var(--dc-muted);
+  font-size: 13px;
+}
+
+/* ---------- нижняя панель на телефоне ---------- */
+
+.dc__bar {
+  display: none;
+}
+
+/* ---------- уведомление ---------- */
+
+.dc__toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 1000;
+  max-width: min(520px, calc(100vw - 32px));
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #23262b;
+  color: #fff;
+  font-size: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translate(-50%, 12px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.dc__toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- заявка ---------- */
+
+.dc-dialog {
+  width: min(520px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 24px;
+  border: 0;
+  border-radius: var(--dc-radius);
+  background: var(--dc-card);
+  color: var(--dc-text);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+.dc-dialog::backdrop {
+  background: rgba(22, 23, 26, 0.5);
+}
+
+.dc-dialog__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--dc-muted);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dc-dialog__close:hover {
+  background: var(--dc-bg);
+  color: var(--dc-text);
+}
+
+.dc-dialog__title {
+  margin: 0 32px 8px 0;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.dc-dialog__text {
+  margin: 0 0 14px;
+  color: var(--dc-muted);
+}
+
+.dc-form__door {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--dc-accent-soft);
+  font-size: 14px;
+}
+
+.dc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.dc-field__label {
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.dc-field input,
+.dc-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--dc-line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--dc-text);
+  font: inherit;
+}
+
+.dc-field textarea {
+  resize: vertical;
+}
+
+.dc-field input[aria-invalid='true'],
+.dc-field textarea[aria-invalid='true'] {
+  border-color: var(--dc-warn);
+}
+
+.dc-field__error {
+  color: var(--dc-warn);
+  font-size: 13px;
+}
+
+.dc-field__error:empty {
+  display: none;
+}
+
+.dc-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.dc-result__json {
+  max-height: 46vh;
+  margin: 0;
+  padding: 12px;
+  overflow: auto;
+  border-radius: 10px;
+  background: #1f2227;
+  color: #e6e8eb;
+  font: 12.5px/1.45 ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.dc-config-error {
+  padding: 16px 20px;
+  border: 1.5px solid var(--dc-warn, #9b4a24);
+  border-radius: 12px;
+  background: #fff6f2;
+  color: #5a2a14;
+  font-family: system-ui, sans-serif;
+}
+
+/* ---------- телефон и узкие окна ---------- */
+
+@media (max-width: 880px) {
+  .dc {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  /* превью разбирается на части: картинка прилипает сверху, кнопки уходят под опции */
+  .dc__preview {
+    display: contents;
+  }
+
+  .dc__stage-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    order: 1;
+    padding: 8px 0;
+    background: var(--dc-bg);
+    /* фон тянется на всю ширину экрана, не создавая горизонтальной прокрутки */
+    box-shadow: 0 0 0 100vmax var(--dc-bg);
+    clip-path: inset(0 -100vmax);
+  }
+
+  .dc__stage {
+    width: auto;
+    height: min(36vh, 320px);
+  }
+
+  .dc__panel {
+    order: 2;
+  }
+
+  .dc__total {
+    display: none;
+  }
+
+  .dc__actions {
+    order: 3;
+  }
+
+  .dc__actions .dc__lead-main {
+    display: none;
+  }
+
+  .dc__bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    order: 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    border-radius: 14px 14px 0 0;
+    background: var(--dc-card);
+    box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .dc__bar-price {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .dc__bar-price span {
+    color: var(--dc-muted);
+    font-size: 12.5px;
+  }
+
+  .dc__bar-total {
+    font-size: 20px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dc-group {
+    padding: 14px;
+  }
+
+  .dc-group__options {
+    grid-template-columns: repeat(auto-fill, minmax(146px, 1fr));
+    gap: 8px;
+  }
+
+  .dc-opt__card {
+    gap: 8px;
+    padding: 8px 8px 8px 6px;
+  }
+
+  .dc-opt__thumb {
+    width: 32px;
+    height: 48px;
+  }
+
+  .dc-opt__text {
+    padding-right: 20px;
+    font-size: 14px;
+  }
+
+  .dc-opt__input:checked + .dc-opt__card::after {
+    top: 6px;
+    right: 6px;
+    width: 16px;
+    height: 16px;
+    background-size: 16px 16px;
+  }
+
+  .dc__toast {
+    bottom: 84px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dc__layer-img,
+  .dc__toast,
+  .dc-opt__card,
+  .dc-btn {
+    transition: none;
+  }
+}
+
+/* ---------- страница демо (index.html) ---------- */
+
+.dc-page {
+  margin: 0;
+  background: #f3f2ef;
+  color: #1d1f22;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.dc-page__wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 24px 40px;
+}
+
+.dc-page__header {
+  margin-bottom: 22px;
+}
+
+.dc-page__title {
+  margin: 0 0 6px;
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.dc-page__lead {
+  max-width: 720px;
+  margin: 0;
+  color: #6a6e75;
+  font-size: 16px;
+}
+
+.dc-page__footer {
+  margin-top: 28px;
+  color: #6a6e75;
+  font-size: 13px;
+}
+
+@media (max-width: 880px) {
+  .dc-page__wrap {
+    padding: 18px 16px 0;
+  }
+
+  .dc-page__header {
+    margin-bottom: 12px;
+  }
+
+  .dc-page__lead {
+    font-size: 14.5px;
+  }
+
+  .dc-page__footer {
+    margin: 20px 0 16px;
+  }
+}

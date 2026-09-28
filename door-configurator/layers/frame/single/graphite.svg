@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1000" viewBox="0 0 600 1000">
+<defs>
+<linearGradient id="mg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a5e64"/><stop offset="1" stop-color="#474a4f"/></linearGradient><filter id="mn" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 0.2"/></feComponentTransfer><feComposite operator="in" in2="SourceGraphic"/></filter>
+<clipPath id="bars"><path d="M154 274 H446 V930 H154 Z M170 290 H430 V930 H170 Z" clip-rule="evenodd"/></clipPath>
+<filter id="sh" x="0" y="0" width="600" height="1000" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="6"/></filter>
+</defs>
+<rect x="152" y="277" width="296" height="653" fill="#000" opacity=".3" filter="url(#sh)"/>
+<path d="M170 290 H430 V930 H170 Z" fill="#141517"/>
+<g clip-path="url(#bars)"><rect x="154" y="274" width="292" height="656" fill="url(#mg)"/><rect x="154" y="274" width="292" height="656" fill="#fff" filter="url(#mn)" opacity=".5"/></g>
+<path d="M154 274 H446 V930 H154 Z" fill="none" stroke="#000" stroke-opacity=".45" stroke-width="1"/>
+<path d="M155 930 V275 H445" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.2"/>
+<path d="M169 930 V289 H431 V930" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="1.5"/>
+</svg>

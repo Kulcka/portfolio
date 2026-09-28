@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Конфигуратор входной двери</title>
+    <meta name="description" content="Соберите входную дверь: тип, покрытие, фрезеровка, стекло, фурнитура. Картинка меняется по слоям, цена пересчитывается сразу." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='3' y='1' width='10' height='14' rx='1' fill='%2323262b'/%3E%3Ccircle cx='10.5' cy='8.5' r='1' fill='%23e0b25a'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="configurator.css" />
+  </head>
+  <body class="dc-page">
+    <main class="dc-page__wrap">
+      <header class="dc-page__header">
+        <h1 class="dc-page__title">Конфигуратор входной двери</h1>
+        <p class="dc-page__lead">
+          Выберите тип, покрытие, фрезеровку, стекло и фурнитуру — картинка собирается из слоёв, цена
+          пересчитывается сразу. Готовой дверью можно поделиться ссылкой или сохранить её картинкой.
+        </p>
+      </header>
+
+      <div data-door-configurator>
+        <noscript>Для конфигуратора нужен включённый JavaScript.</noscript>
+      </div>
+
+      <footer class="dc-page__footer">
+        Демонстрационный проект: изображения, цены и опции условные и задаются в файле config.js.
+      </footer>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="configurator.js"></script>
+  </body>
+</html>

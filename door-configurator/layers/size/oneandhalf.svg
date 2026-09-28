@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1000" viewBox="0 0 600 1000">
+<defs>
+<filter id="blur" x="0" y="0" width="600" height="1000" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="7"/></filter>
+<linearGradient id="thr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9dcdf"/><stop offset=".5" stop-color="#9ea3a8"/><stop offset="1" stop-color="#6f7479"/></linearGradient>
+</defs>
+<ellipse cx="300" cy="938" rx="229" ry="10" fill="#000" opacity=".28" filter="url(#blur)"/>
+<rect x="93" y="928" width="414" height="9" rx="2" fill="url(#thr)"/>
+</svg>
