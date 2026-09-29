@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Демо-лендинги на HTML/CSS/JS — портфолио</title>
+  <meta name="description" content="Пять демо-лендингов для вымышленных компаний: стоматология, фитнес-студия, онлайн-курс, ремонт квартир, кофейня. Чистый HTML, CSS и JavaScript, адаптив 320–1440 px.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="Демо-лендинги на HTML/CSS/JS">
+  <meta property="og:description" content="Пять демо-лендингов для портфолио: адаптив, форма заявки, SEO-разметка.">
+  <meta property="og:image" content="https://kulcka.github.io/portfolio/landings/renovation/og.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2316143a'/%3E%3Cpath d='M4 5h8M4 8h8M4 11h5' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E">
+  <style>
+    :root { --bg: #f6f6f8; --text: #16161d; --muted: #55556a; --card: #fff; --line: #e3e3ea; --accent: #3f3cbb; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; background: var(--bg); color: var(--text); font: 1rem/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+    main { max-width: 1180px; margin: 0 auto; padding: 48px 16px 64px; }
+    h1 { font-size: clamp(1.8rem, 1.3rem + 2vw, 2.6rem); line-height: 1.15; margin: 0 0 12px; letter-spacing: -.02em; }
+    .lead { color: var(--muted); max-width: 720px; margin: 0 0 8px; font-size: 1.1rem; }
+    .note { display: inline-block; margin: 8px 0 32px; padding: 6px 12px; border: 1px dashed #b45309; border-radius: 8px; color: #7c2d12; background: #fff7ed; font-size: .9rem; }
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+    @media (min-width: 700px) { ul { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1060px) { ul { grid-template-columns: repeat(3, 1fr); } }
+    li { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .2s, transform .2s; }
+    li:hover { box-shadow: 0 16px 40px rgba(22, 22, 29, .12); transform: translateY(-2px); }
+    img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; border-bottom: 1px solid var(--line); }
+    .body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    h2 { font-size: 1.15rem; margin: 0; }
+    h2 a { color: inherit; text-decoration: none; }
+    h2 a::after { content: ""; position: absolute; inset: 0; }
+    li { position: relative; }
+    h2 a:focus-visible { outline: none; }
+    li:focus-within { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .body p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .tags { margin-top: auto !important; padding-top: 10px; font-size: .85rem !important; color: var(--accent) !important; font-weight: 600; }
+    footer { margin-top: 40px; color: var(--muted); font-size: .9rem; }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Демо-лендинги на HTML, CSS и JavaScript</h1>
+    <p class="lead">Пять одностраничных сайтов в разных нишах и стилях. Без конструкторов и фреймворков: адаптив от 320 до 1440 px, форма заявки с проверкой полей, SEO-разметка и картинка для соцсетей, плавная навигация, доступность (контраст, подписи полей, работа с клавиатуры).</p>
+    <p class="note">Демо-проекты для портфолио: компании вымышлены, цены и контакты — примеры, блоки отзывов помечены как образец.</p>
+    <ul>
+      <li>
+        <img src="dental/og.png" alt="Первый экран лендинга стоматологии «Мятная»" width="1200" height="630" loading="lazy">
+        <div class="body">
+          <h2><a href="dental/">Стоматология «Мятная»</a></h2>
+          <p>Светлый медицинский стиль. Услуги, прайс по вкладкам, FAQ, запись на осмотр.</p>
+          <p class="tags">вкладки · аккордеон · форма записи</p>
+        </div>
+      </li>
+      <li>
+        <img src="fitness/og.png" alt="Первый экран лендинга фитнес-студии «Пульс 42»" width="1200" height="630" loading="lazy">
+        <div class="body">
+          <h2><a href="fitness/">Фитнес-студия «Пульс 42»</a></h2>
+          <p>Тёмная тема и крупная типографика. Расписание по дням, абонементы, пробная тренировка.</p>
+          <p class="tags">расписание · переключатель цен · бегущая строка</p>
+        </div>
+      </li>
+      <li>
+        <img src="course/og.png" alt="Первый экран лендинга онлайн-курса «SQL за 30 дней»" width="1200" height="630" loading="lazy">
+        <div class="body">
+          <h2><a href="course/">Онлайн-курс «SQL за 30 дней»</a></h2>
+          <p>Продуктовый стиль. Программа по неделям, интерактивный пример урока, тарифы, запись.</p>
+          <p class="tags">программа · пример урока · тарифы</p>
+        </div>
+      </li>
+      <li>
+        <img src="renovation/og.png" alt="Первый экран лендинга ремонта квартир «Ровный угол»" width="1200" height="630" loading="lazy">
+        <div class="body">
+          <h2><a href="renovation/">Ремонт квартир «Ровный угол»</a></h2>
+          <p>Строительный стиль. Калькулятор стоимости, который переносит расчёт в заявку, этапы работ.</p>
+          <p class="tags">калькулятор · этапы · вызов замерщика</p>
+        </div>
+      </li>
+      <li>
+        <img src="coffee/og.png" alt="Первый экран лендинга кофейни «Зерно и пар»" width="1200" height="630" loading="lazy">
+        <div class="body">
+          <h2><a href="coffee/">Кофейня «Зерно и пар»</a></h2>
+          <p>Тёплая редакционная эстетика. Меню по вкладкам, каппинги, бронь столика на дату и время.</p>
+          <p class="tags">меню · бронь столика · анимация пара</p>
+        </div>
+      </li>
+    </ul>
+    <footer>
+      <p>Исходный код — в репозитории <a href="https://github.com/Kulcka/portfolio/tree/main/landings">github.com/Kulcka/portfolio</a>. Вся графика нарисована кодом (SVG и CSS), чужих изображений нет.</p>
+    </footer>
+  </main>
+</body>
+</html>
